@@ -6,7 +6,7 @@ import "./TaxesFromDonations.sol";
 contract CrowdFounding is DonationFounding {
     uint256 public goal;
     uint256 public deadline;
-    TaxesFromDonations public taxesFromDonations;
+    TaxesFromDonations taxesFromDonations;
     bool public ended;
 
     event FundingGoalReached(uint256 totalFunds);
@@ -17,11 +17,11 @@ contract CrowdFounding is DonationFounding {
         string memory symbol_,
         uint256 _goal,
         uint256 _deadline,
-        TaxesFromDonations _taxFromDonations
+        TaxesFromDonations _taxesFromDonations
     ) DonationFounding(name_, symbol_) {
         goal = _goal;
         deadline = block.timestamp + _deadline;
-        taxesFromDonations = _taxFromDonations;
+        taxesFromDonations = TaxesFromDonations(_taxesFromDonations);
     }
 
     modifier fundingActive() {

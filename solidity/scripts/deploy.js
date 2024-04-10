@@ -16,7 +16,7 @@ async function deploy() {
   let crowdFoundingFactory = await ethers.getContractFactory("CrowdFounding");
   let crowdFounding = await crowdFoundingFactory
     .connect(fundOwner)
-    .deploy("CrowdFounding", "LEU", 1e10, 1000 * 60, taxesFromDonations);
+    .deploy("CrowdFounding", "LEU", 1e10, 1000 * 60, taxesFromDonations.address);
   await crowdFounding.deployed();
   console.log("crowdFounding address: ", crowdFounding.address);
 }
