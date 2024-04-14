@@ -1,4 +1,5 @@
-pragma solidity >=0.8.0 <0.9.0;
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.8.20 <0.9.0;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -24,10 +25,10 @@ contract TaxesFromDonations is ERC20, Ownable {
         return amount / 10;
     }
 
-    function tax(uint256 amount) external taxPositive(amount) {
+    function tax(uint256 amount) public payable taxPositive(amount) {
         require(amount > 0, "Tax must be greater than 0");
         uint256 taxAmount = claculateTax(amount);
-        transferFrom(msg.sender, owner(), taxAmount);
+        payable(owner()).transfer(taxAmount);
         totalTaxes += taxAmount;
         emit TaxReceived(msg.sender, taxAmount);
     }
