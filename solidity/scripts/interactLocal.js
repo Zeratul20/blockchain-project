@@ -3,23 +3,15 @@ const { ethers } = require("hardhat");
 
 async function interact() {
 
-  const fundOwnerAddress = "0x1b5b0a22AAc98F35291896815AE0e966bd2415B6"
-  const taxesOwnerAddress = "0x9d5c7802ff8e22E3eF84dFd191f933E1cf5F5B61"
-  const user1Address = "0xad64657b2c10352d2430fBF55Dc404Ca9f6Eb730"
-  const user2Address = "0x212095520080EB40627E40D35C059c56675CE443"
+  const [fundOwner, taxesOwner, user1, user2] = await ethers.getSigners();
 
-  const fundOwnerSigner = ethers.provider.getSigner(fundOwnerAddress);
-  const taxesOwnerSigner = ethers.provider.getSigner(taxesOwnerAddress);
-  const user1 = ethers.provider.getSigner(user1Address);
-  const user2 = ethers.provider.getSigner(user2Address);
-
-  let deployedTaxesFromDonationsAddress = "0x51cf30A3158592dC81C5eAD79161ADbE05482640";
+  let deployedTaxesFromDonationsAddress = "0x8464135c8F25Da09e49BC8782676a84730C318bC";
   let taxesFromDonations = await ethers.getContractAt(
     "TaxesFromDonations",
     deployedTaxesFromDonationsAddress
   );
 
-  let deployedCrowdFoundingAddress = "0x49C90A1fC6EeFac668DFC54a133FA361E9A597b8";
+  let deployedCrowdFoundingAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
   let crowdFounding = await ethers.getContractAt(
     "CrowdFounding",
     deployedCrowdFoundingAddress
