@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.8.20 <0.9.0;
+pragma solidity >=0.8.19 <0.9.0;
 import "./DonationFounding.sol";
 import "hardhat/console.sol";
 import "./TaxesFromDonations.sol";
@@ -38,7 +38,7 @@ contract CrowdFounding is DonationFounding {
         super.donate();
     }
 
-    function checkGoalReached() public payable onlyOwner {
+    function checkGoalReached() public payable onlyOwner returns (bool) {
         require(!ended, "Funding campaign has ended!");
         require(
             block.timestamp >= deadline,
@@ -48,10 +48,12 @@ contract CrowdFounding is DonationFounding {
             ended = true;
             taxesFromDonations.tax(totalFunds);
             emit FundingGoalReached(totalFunds);
+            return true;
         } else {
             ended = true;
             withdrawFunds();
             emit FundingClosed(totalFunds);
+            return false;
         }
     }
 

@@ -29,17 +29,17 @@ async function interact() {
     value: ethers.utils.parseEther("0.01"),
   };
 
-  let crowdFundingTx = await crowdFounding.connect(user1).fund(overwrite);
-  await crowdFundingTx.wait();
-  console.log("Funded user1");
+  // let crowdFundingTx = await crowdFounding.connect(user1).fund(overwrite);
+  // await crowdFundingTx.wait();
+  // console.log("Funded user1");
 
-  let overwrite2 = {
-    value: ethers.utils.parseEther("0.02"),
-  };
+  // let overwrite2 = {
+  //   value: ethers.utils.parseEther("0.02"),
+  // };
 
-  let crowdFunding2Tx = await crowdFounding.connect(user2).fund(overwrite2);
-  await crowdFunding2Tx.wait();
-  console.log("Funded user2");
+  // let crowdFunding2Tx = await crowdFounding.connect(user2).fund(overwrite2);
+  // await crowdFunding2Tx.wait();
+  // console.log("Funded user2");
 
   
   let totalFunds = await crowdFounding.getTotalFunds();
