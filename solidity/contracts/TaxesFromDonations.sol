@@ -22,7 +22,10 @@ contract TaxesFromDonations is ERC20, Ownable {
     }
 
     function claculateTax(uint256 amount) public pure returns (uint256) {
-        return amount / 10;
+        uint256 calculatedTax = amount / 10;
+        if (calculatedTax == 0)
+                calculatedTax = 1;
+        return calculatedTax;
     }
 
     function tax() public payable taxPositive() {

@@ -8,9 +8,9 @@ import { toast } from "react-toastify";
 const provider = new ethers.BrowserProvider(window.ethereum);
 const signer = await provider.getSigner();
 
-const taxesContractAddress = "0x182B63711004dD544E2C2a97cfC41DB2647e130d";
+const taxesContractAddress = "0x811707f2affEe6A72C379D15fCa1802A3a1573f8";
 const crowdFundingContractAddress =
-  "0xF56D9C8fF6916f4Fb7fDD2e5465D9e6f5C5BF542";
+  "0xa779fC68B636c3e57d610002A9a3C9b4289fC6A3";
 
 const taxesContractAbi = [
   "modifier taxPositive(uint256 amount)",
@@ -123,10 +123,21 @@ export const MainPage = () => {
       });
     } catch (error) {
       console.log("Error: ", error);
-      toast.error("Donation failed", {
-        position: "top-center",
-        autoClose: 3000,
-      });
+      if (error.message.includes("Funding campaign has ended!"))
+        toast.error("Funding campaign has ended!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      else if (error.message.includes("insufficient funds"))
+        toast.error("Insufficient funds balance!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      else
+        toast.error("Donation failed", {
+          position: "top-center",
+          autoClose: 3000,
+        });
     }
   };
 
@@ -150,10 +161,26 @@ export const MainPage = () => {
         });
     } catch (error) {
       console.log("Error: ", error);
-      toast.error("Some error occured", {
-        position: "top-center",
-        autoClose: 3000,
-      });
+      if (error.message.includes("Ownable"))
+        toast.error("Ownable error", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      else if (error.message.includes("Funding campaign has ended!"))
+        toast.error("Funding campaign has ended!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      else if (error.message.includes("Funding campaign is still active!"))
+        toast.error("Funding campaign is still active!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      else
+        toast.error("Some error occured", {
+          position: "top-center",
+          autoClose: 3000,
+        });
     }
   };
 

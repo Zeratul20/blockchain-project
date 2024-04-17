@@ -61,7 +61,7 @@ contract CrowdFounding is DonationFounding {
 
     function withdrawFunds() public onlyOwner {
         require(ended, "Funding campaign has not ended!");
-        require(totalFunds >= goal, "Funding goal not reached!");
+        require(totalFunds < goal, "Funding goal reached!");
         // Transfer to the initial senders
         // Iterate through dfonations mapping
 
