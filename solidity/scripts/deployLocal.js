@@ -20,7 +20,7 @@ async function deploy() {
       "CrowdFounding",
       "LEU",
       1e10,
-      60,
+      120,
       taxesFromDonations.address
     );
   await crowdFounding.deployed();
