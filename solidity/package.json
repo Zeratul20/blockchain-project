@@ -4,6 +4,7 @@
     "hardhat": "^2.22.2"
   },
   "dependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.2.3"
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "solc": "^0.8.25"
   }
 }

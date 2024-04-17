@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.8.19 <0.9.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -27,16 +27,8 @@ contract DonationFounding is ERC20, Ownable {
     }
 
     function donate() hasSufficientFunds public payable {
-        // approve(owner(), 10 * msg.value);
-        // approve(owner(), 100000000000 * msg.value);
-        // approve(msg.sender, 1000000000000 * msg.value);
-        // uint256 tokensAllowedOwner = allowance(owner(), msg.sender);
-        // uint256 tokensAllowedMsgSender = allowance(msg.sender, owner());
-        // console.log("Tokens allowed Owner: ", tokensAllowedOwner);
-        // console.log("Tokens allowed MsgSender: ", tokensAllowedMsgSender);
-        console.log("HERE BEFORE");
-        // transfer(owner(), msg.value);
-        payable(owner()).transfer(msg.value);
+        console.log("Owner: ", owner());
+        _mint(msg.sender, msg.value);
         console.log("HERE AFTER");
         contributions[msg.sender] += msg.value;
         donors.push(msg.sender);

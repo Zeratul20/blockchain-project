@@ -2,7 +2,7 @@ require("@nomiclabs/hardhat-ethers");
 const { ethers } = require("hardhat");
 
 async function deploy() {
-  const [fundOwnerSigner, taxesOwnerSigner] = await ethers.getSigners();
+  const [fundOwnerSigner, taxesOwnerSigner, user1, user2] = await ethers.getSigners();
 
   let taxesFromDonationsFactory = await ethers.getContractFactory(
     "TaxesFromDonations"
@@ -20,11 +20,19 @@ async function deploy() {
       "CrowdFounding",
       "LEU",
       1e10,
-      120,
+      60,
       taxesFromDonations.address
     );
   await crowdFounding.deployed();
   console.log("crowdFounding address: ", crowdFounding.address);
+
+  let approvedCrowdOwner = await crowdFounding.connect(fundOwnerSigner).approve(fundOwnerSigner.address, ethers.utils.parseEther("1"));
+  let approvedCrowdSender1 = await crowdFounding.connect(fundOwnerSigner).approve(user1.address, ethers.utils.parseEther("1"));
+  let approvedCrowdSender2 = await crowdFounding.connect(fundOwnerSigner).approve(user2.address, ethers.utils.parseEther("1"));
+  await approvedCrowdOwner.wait();
+  await approvedCrowdSender1.wait();
+  await approvedCrowdSender2.wait();
+  console.log("Approved crowd funding");
 }
 
 deploy()

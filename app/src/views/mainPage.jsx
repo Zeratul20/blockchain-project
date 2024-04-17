@@ -8,9 +8,9 @@ import { toast } from "react-toastify";
 const provider = new ethers.BrowserProvider(window.ethereum);
 const signer = await provider.getSigner();
 
-const taxesContractAddress = "0xfda13D0CE5530ABBc933451BAd010023B60E4515";
+const taxesContractAddress = "0x182B63711004dD544E2C2a97cfC41DB2647e130d";
 const crowdFundingContractAddress =
-  "0xCBF98f6961Ac86A25C0DE4C6730bB5B144130b0D";
+  "0xF56D9C8fF6916f4Fb7fDD2e5465D9e6f5C5BF542";
 
 const taxesContractAbi = [
   "modifier taxPositive(uint256 amount)",
@@ -68,7 +68,6 @@ export const MainPage = () => {
   };
   const handleCalculateTax = async (input) => {
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
       const claculateTax = await taxesContract.claculateTax(input);
       console.log("claculateTax: ", parseInt(claculateTax));
       setCalculatedTax(parseInt(claculateTax));
@@ -111,6 +110,8 @@ export const MainPage = () => {
   };
 
   const handleDonate = async (input) => {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
     try {
       const donation = await crowdFundingContract.connect(signer).fund({
         value: ethers.parseEther(input),
@@ -130,8 +131,9 @@ export const MainPage = () => {
   };
 
   const handleGoalReached = async () => {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
     try {
-      
       const checkIfGoalReached = await crowdFundingContract
         .connect(signer)
         .checkGoalReached();

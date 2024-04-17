@@ -13,13 +13,13 @@ async function interact() {
   const user1 = ethers.provider.getSigner(user1Address);
   const user2 = ethers.provider.getSigner(user2Address);
 
-  let deployedTaxesFromDonationsAddress = "0x51cf30A3158592dC81C5eAD79161ADbE05482640";
+  let deployedTaxesFromDonationsAddress = "0xcF6DF8029433881D03b0e1C22630887AEA0375B2";
   let taxesFromDonations = await ethers.getContractAt(
     "TaxesFromDonations",
     deployedTaxesFromDonationsAddress
   );
 
-  let deployedCrowdFoundingAddress = "0x49C90A1fC6EeFac668DFC54a133FA361E9A597b8";
+  let deployedCrowdFoundingAddress = "0x636eBd94EAcD6C4338fB1D62c14B9389b5600Ee5";
   let crowdFounding = await ethers.getContractAt(
     "CrowdFounding",
     deployedCrowdFoundingAddress

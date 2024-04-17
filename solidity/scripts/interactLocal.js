@@ -5,13 +5,19 @@ async function interact() {
 
   const [fundOwnerSigner, taxesOwnerSigner, user1, user2] = await ethers.getSigners();
 
-  let deployedTaxesFromDonationsAddress = "0x8464135c8F25Da09e49BC8782676a84730C318bC";
+  console.log("Fund owner address: ", fundOwnerSigner.address);
+  console.log("Taxes owner address: ", taxesOwnerSigner.address);
+  console.log("User1 address: ", user1.address);
+  console.log("User2 address: ", user2.address);
+
+
+  let deployedTaxesFromDonationsAddress = "0x71C95911E9a5D330f4D621842EC243EE1343292e";
   let taxesFromDonations = await ethers.getContractAt(
     "TaxesFromDonations",
     deployedTaxesFromDonationsAddress
   );
 
-  let deployedCrowdFoundingAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  let deployedCrowdFoundingAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
   let crowdFounding = await ethers.getContractAt(
     "CrowdFounding",
     deployedCrowdFoundingAddress
@@ -33,7 +39,6 @@ async function interact() {
   // await crowdFunding2Tx.wait();
   // console.log("Funded user2");
 
-  
   let totalFunds = await crowdFounding.getTotalFunds();
   console.log("Total funds: ", totalFunds.toString());
   
